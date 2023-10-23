@@ -6,6 +6,7 @@ import serial
 import serial.tools.list_ports
 import sys
 import time
+import pid
 
 def show_ports():
     ports = serial.tools.list_ports.comports()
