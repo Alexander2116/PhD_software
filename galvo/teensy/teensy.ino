@@ -4,19 +4,105 @@ XY2_100 galvo;
 int _DELAY = 2;
 int _STEP = 1;
 
-int[] START_X = [];
-int[] START_Y = [];
-int[] END_X = [];
-int[] END_Y = [];
+uint16_t START_X[] = {};
+uint16_t START_Y[] = {};
+uint16_t END_X[] = {};
+uint16_t END_Y[] = {};
+int ARRAY_SIZE = 0; // should be first signal sent from PC
 
-void draw_line(uint16_t start_x, uint16_t start y, uint16_t end_x, uint16_t end_y){
+void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y, int data_length){
+  // data_length = how many data points from start to end
+
+  uint16_t x = start_x;
+  uint16_t y = start_y;
+
+  uint16_t step_x = 0;
+  uint16_t step_y = 0;
+  if(end_x > start_x && end_y > start_y){
+    step_x = (uint16_t)((end_x-start_x)/(data_length));
+    step_y = (uint16_t)((end_y-start_y)/(data_length));
+  }
+  else if(end_x < start_x && end_y > start_y){
+    step_x = (uint16_t)(-(end_x-start_x)/(data_length));
+    step_y = (uint16_t)((end_y-start_y)/(data_length));
+  }
+  else if(end_x > start_x && end_y < start_y){
+    step_x = (uint16_t)((end_x-start_x)/(data_length));
+    step_y = (uint16_t)(-(end_y-start_y)/(data_length));
+  }
+  else{
+    step_x = (uint16_t)(-(end_x-start_x)/(data_length));
+    step_y = (uint16_t)(-(end_y-start_y)/(data_length));
+  }
+
+  // prevent STOP mode
+  if(step_x == 0){
+    step_x = 1;
+  }
+  if(step_y ==0){
+    step_y = 1;
+  }
+
+  galvo.setPos(x,y);
+  // State machine for each case
+  if(end_x > start_x && end_y > start_y){
+      while(x < end_x && y < end_y){
+        x += step_x;
+        y += step_y;
+        galvo.setPos(x,y);
+        delay(_DELAY);
+      }
+  }
+  else if(end_x < start_x && end_y > start_y){
+      while(x > end_x && y < end_y){
+        x -= step_x;
+        y += step_y;
+        galvo.setPos(x,y);
+        delay(_DELAY);
+      }
+  }
+  else if(end_x > start_x && end_y < start_y){
+      while(x < end_x && y > end_y){
+        x += step_x;
+        y -= step_y;
+        galvo.setPos(x,y);
+        delay(_DELAY);
+      }
+  }
+  else{
+      while(x > end_x && y > end_y){
+        x -= step_x;
+        y -= step_y;
+        galvo.setPos(x,y);
+        delay(_DELAY);
+      }
+  }
+  galvo.setPos(end_x,end_y);
+  
 
 }
 
 void get_points(){
+  String text = "";
+  // Careful! Bad practise
+  while(true){
+    if(text.trim() == "END"){
+      break;
+    }
+    // separate string to each: string should look like sX_sY_eX_eY/r/n
+  }
+}
+
+void get_array_size(){
 
 }
 
+void append_points(uint16_t x, uint16_t y){
+  ARRAY_SIZE += 1;
+
+}
+
+/*
 // actually x and y are inverted (function name indicated actual movement)
 void line_y_down(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
 
@@ -72,21 +158,17 @@ void line_xy(uint16_t initial_x, uint16_t initial_y, int length=4000, int step =
     delay(_DELAY);
   }
 }
-
+*/
 
 
 
 void setup() {
   galvo.begin();
-  galvo.setPos(1000,3000);
+  galvo.setPos(0,0);
 }
 
 void loop() {
-  uint16_t Len = 4000;
-  line_xy(1000,3000, Len, _STEP);
-  line_x(1000+Len,3000+Len, Len, _STEP);
-  line_y(1000,3000+Len, Len, _STEP);
-  //const uint16_t pause = 1;
+
 
 }
 

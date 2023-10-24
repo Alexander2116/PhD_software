@@ -13,6 +13,8 @@ FROM API:
 
 IDEAS FOR TEENSY:
 - VOID DrawLine (start point, end point, step)
+even better, instead of vectors (start, end), use array of next points e.g [p1,p2,p3,p4]: p1->p2->p3->p4->p1->p2->...
+so instead of 4 arrays we would require 2 (memory efficient)
 
 HOW TO MAKE IT FASTER:
 - program teensy in C (now in Arduino-like code)
