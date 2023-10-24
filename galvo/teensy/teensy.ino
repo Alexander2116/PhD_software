@@ -4,6 +4,19 @@ XY2_100 galvo;
 int _DELAY = 2;
 int _STEP = 1;
 
+int[] START_X = [];
+int[] START_Y = [];
+int[] END_X = [];
+int[] END_Y = [];
+
+void draw_line(uint16_t start_x, uint16_t start y, uint16_t end_x, uint16_t end_y){
+
+}
+
+void get_points(){
+
+}
+
 // actually x and y are inverted (function name indicated actual movement)
 void line_y_down(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
 
