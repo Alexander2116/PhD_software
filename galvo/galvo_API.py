@@ -22,3 +22,21 @@ HOW TO MAKE IT FASTER:
 - Teensy seems fast enough but the issue is the scanner that cannot handle high speed from teensy (is it because of differential line driver?)
 - Different scanner 
 """
+
+import serial
+import time
+
+class Galvo:
+    
+    def __init__(self,com:str):
+        self.inst = serial.Serial(com,baudrate = 38600)
+        
+    def _set_array_size(self, size:int):
+        self.inst.write(("AS_"+str(size)+"/r/n").encode())
+    
+    def send_pattern(self, x: list, y: list):
+        self.inst.write(b"GD/r/n")
+        time.sleep(1)
+        for i in range(len(x)):
+            self.inst.write((str(x[i])+ "_"+ str(y[i]) + "/r/n").encode())
+        self.inst.write(b"END/r/n")
