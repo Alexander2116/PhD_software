@@ -6,7 +6,7 @@ int _STEP = 1;
 
 int ARRAY_SIZE = 0; // should be first signal sent from PC
 
-void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y, int data_length){
+void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y, int data_length=100){
   // data_length = how many data points from start to end
 
   uint16_t x = start_x;
@@ -76,6 +76,13 @@ void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_
   galvo.setPos(end_x,end_y);
 }
 
+void draw_figure(uint16_t X[], uint16_t Y[]){
+  for(int i=0; i < ARRAY_SIZE-1; i++){
+    draw_line(X[i], Y[i],X[i+1], Y[i+1]);
+  }
+  draw_line(X[ARRAY_SIZE-1], Y[ARRAY_SIZE-1], X[0], Y[0]);
+}
+
 String getValue(String data, char separator, int index)
 {
     int found = 0;
@@ -110,15 +117,6 @@ void get_points(uint16_t X[], uint16_t Y[]){
     Y[index] = (uint16_t)yval.toInt();
     index += 1;
   }
-}
-
-void set_array_size(int size){
-  ARRAY_SIZE = size;
-}
-
-void append_points(uint16_t x, uint16_t y){
-  ARRAY_SIZE += 1;
-
 }
 
 /*
@@ -190,12 +188,20 @@ void loop() {
   String command = Serial.readString();
   // Set array size
   if(getValue(command, '_', 0) == "AS"){
+    ARRAY_SIZE = getValue(command, '_', 1).toInt();
   }
   // Get Data
   else if(command == "GD"){
     uint16_t X_POINTS[ARRAY_SIZE];
     uint16_t Y_POINTS[ARRAY_SIZE];
     get_points(X_POINTS,Y_POINTS);
+    draw_figure(X_POINTS,Y_POINTS);
+  }
+  else if(command == "INF"){
+    while(true){
+      //draw_figure(X_POINTS,Y_POINTS);
+      break;
+    }
   }
 
 }
