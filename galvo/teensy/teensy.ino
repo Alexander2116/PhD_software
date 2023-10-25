@@ -92,7 +92,7 @@ String getValue(String data, char separator, int index)
     return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 
-void get_points(uint16_t *X, uint16_t *Y){
+void get_points(uint16_t X[], uint16_t Y[]){
   String text = "";
   // Careful! Bad practise
   int index = 0;
@@ -190,13 +190,12 @@ void loop() {
   String command = Serial.readString();
   // Set array size
   if(getValue(command, '_', 0) == "AS"){
-    ARRAY_SIZE = getValue(command.trim(), '_', 1).toInt();
-    uint16_t X_POINTS[ARRAY_SIZE];
-    uint16_t Y_POINTS[ARRAY_SIZE];
   }
   // Get Data
   else if(command == "GD"){
-
+    uint16_t X_POINTS[ARRAY_SIZE];
+    uint16_t Y_POINTS[ARRAY_SIZE];
+    get_points(X_POINTS,Y_POINTS);
   }
 
 }
