@@ -83,18 +83,47 @@ void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_
 }
 
 void get_points(){
+  uint16_t X[ARRAY_SIZE];
+  *START_X = &X;
+  START_Y = new uint16_t[ARRAY_SIZE];
+
   String text = "";
   // Careful! Bad practise
   while(true){
+    text = Serial.readString();
+    // text = Serial.readStringUntil(char terminator)
     if(text.trim() == "END"){
       break;
     }
+
     // separate string to each: string should look like sX_sY_eX_eY/r/n
+    char *ptr; // declare a ptr pointer  
+    ptr = strtok(text.trim(), "_"); // use strtok() function to separate string using comma (,) delimiter.   
+    // use while loop to check ptr is not null  
+    int i = 0;
+    while (ptr != NULL)  
+    {  
+        cout << ptr  << endl; // print the string token  
+        ptr = strtok (NULL, "_");  
+        if(i==0){
+          START_X.append((uint16_t)ptr);
+        }
+        else if(i==1){
+          START_Y.append((uint16_t)ptr);
+        }
+        else if(i==2){
+          END_X.append((uint16_t)ptr);
+        }
+        else{
+          END_Y.append((uint16_t)ptr);
+        }
+        i+=1;
+    }  
   }
 }
 
-void get_array_size(){
-
+void set_array_size(int size){
+  ARRAY_SIZE = size;
 }
 
 void append_points(uint16_t x, uint16_t y){
