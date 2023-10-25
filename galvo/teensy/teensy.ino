@@ -4,10 +4,6 @@ XY2_100 galvo;
 int _DELAY = 2;
 int _STEP = 1;
 
-uint16_t START_X[] = {};
-uint16_t START_Y[] = {};
-uint16_t END_X[] = {};
-uint16_t END_Y[] = {};
 int ARRAY_SIZE = 0; // should be first signal sent from PC
 
 void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y, int data_length){
@@ -78,47 +74,41 @@ void draw_line(uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_
       }
   }
   galvo.setPos(end_x,end_y);
-  
-
 }
 
-void get_points(){
-  uint16_t X[ARRAY_SIZE];
-  *START_X = &X;
-  START_Y = new uint16_t[ARRAY_SIZE];
+String getValue(String data, char separator, int index)
+{
+    int found = 0;
+    int strIndex[] = { 0, -1 };
+    int maxIndex = data.length() - 1;
 
+    for (int i = 0; i <= maxIndex && found <= index; i++) {
+        if (data.charAt(i) == separator || i == maxIndex) {
+            found++;
+            strIndex[0] = strIndex[1] + 1;
+            strIndex[1] = (i == maxIndex) ? i+1 : i;
+        }
+    }
+    return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+void get_points(uint16_t *X, uint16_t *Y){
   String text = "";
   // Careful! Bad practise
+  int index = 0;
   while(true){
-    text = Serial.readString();
+    text = (Serial.readString()).trim();
     // text = Serial.readStringUntil(char terminator)
-    if(text.trim() == "END"){
+    if(text == "END" || index == ARRAY_SIZE){
       break;
     }
 
+    String xval = getValue(text, '_', 0);
+    String yval = getValue(text, '_', 1);
     // separate string to each: string should look like sX_sY_eX_eY/r/n
-    char *ptr; // declare a ptr pointer  
-    ptr = strtok(text.trim(), "_"); // use strtok() function to separate string using comma (,) delimiter.   
-    // use while loop to check ptr is not null  
-    int i = 0;
-    while (ptr != NULL)  
-    {  
-        cout << ptr  << endl; // print the string token  
-        ptr = strtok (NULL, "_");  
-        if(i==0){
-          START_X.append((uint16_t)ptr);
-        }
-        else if(i==1){
-          START_Y.append((uint16_t)ptr);
-        }
-        else if(i==2){
-          END_X.append((uint16_t)ptr);
-        }
-        else{
-          END_Y.append((uint16_t)ptr);
-        }
-        i+=1;
-    }  
+    X[index] = (uint16_t)xval.toInt();
+    Y[index] = (uint16_t)yval.toInt();
+    index += 1;
   }
 }
 
@@ -197,7 +187,17 @@ void setup() {
 }
 
 void loop() {
+  String command = Serial.readString();
+  // Set array size
+  if(getValue(command, '_', 0) == "AS"){
+    ARRAY_SIZE = getValue(command.trim(), '_', 1).toInt();
+    uint16_t X_POINTS[ARRAY_SIZE];
+    uint16_t Y_POINTS[ARRAY_SIZE];
+  }
+  // Get Data
+  else if(command == "GD"){
 
+  }
 
 }
 
