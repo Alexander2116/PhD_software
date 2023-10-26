@@ -34,12 +34,17 @@ print(serial.__file__)
 class Galvo:
     def __init__(self,com:str):
         self.inst = serial.Serial(com,baudrate = 38400)
-        
+    
+    
+    def _read(self):
+        print(self.inst.readline())
+
     def _set_array_size(self, size:int):
         self.inst.write(("AS_"+str(size)+"/r/n").encode())
     
     def send_pattern(self, x: list, y: list):
         self._set_array_size(len(x))
+        self._read()
         time.sleep(0.1)
         self.inst.write(b"GD/r/n")
         time.sleep(0.1)
@@ -111,6 +116,7 @@ def my_sort(x:list, y:list, o_x:list =[], o_y:list=[]):
 gal = Galvo("COM3")
 pat = Pattern()
 pat.detect_corners("galvo\\square.jpg")
-pat.show_corners()
 x,y = pat.get_points()
 print(my_sort(x,y))
+
+gal.send_pattern(x,y)
