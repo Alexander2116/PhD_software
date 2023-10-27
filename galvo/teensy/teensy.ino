@@ -1,7 +1,7 @@
 #include <XY2_100.h>
 XY2_100 galvo;
 
-int _DELAY = 3;
+int _DELAY = 1;
 int _STEP = 1;
 
 int ARRAY_SIZE = 0; // should be first signal sent from PC
@@ -199,7 +199,7 @@ void checkers(uint16_t xs, uint16_t ys, uint16_t length = 1000, uint16_t step = 
 
 void setup() {
   galvo.begin();
-  galvo.setPos(20000,20000);
+  galvo.setPos(32000,32000);
 }
 
 void loop() {
@@ -223,8 +223,8 @@ void loop() {
     }
   }
   */
-  draw_ractangle(20000,20000,2000,4);
-  checkers(20000,20000,2000,4);
+  draw_ractangle(32000,32000,6000,4);
+  checkers(32000,32000,6000,5);
 }
 
 
