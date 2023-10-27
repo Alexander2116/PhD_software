@@ -1,7 +1,7 @@
 #include <XY2_100.h>
 XY2_100 galvo;
 
-int _DELAY = 2;
+int _DELAY = 3;
 int _STEP = 1;
 
 int ARRAY_SIZE = 0; // should be first signal sent from PC
@@ -119,44 +119,46 @@ void get_points(uint16_t X[], uint16_t Y[]){
   }
 }
 
-/*
+
 // actually x and y are inverted (function name indicated actual movement)
-void line_y_down(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
+void line_y_down(uint16_t initial_x, uint16_t initial_y,uint16_t length=4000, uint16_t step = 5){
 
   uint16_t in_x = initial_x;
   galvo.setPos(initial_x, initial_y);
+  delay(_DELAY);
   for(uint16_t x= initial_x; x<(length+initial_x); x += step){
     in_x -= step;
     galvo.setPos(in_x, initial_y);
     delay(_DELAY);
   }
 }
-void line_y_up(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
+void line_y_up(uint16_t initial_x, uint16_t initial_y,uint16_t length=4000, uint16_t step = 5){
 
   uint16_t in_x = initial_x;
   galvo.setPos(initial_x, initial_y);
+  delay(_DELAY);
   for(uint16_t x= initial_x; x<(length+initial_x); x += step){
     in_x += step;
     galvo.setPos(in_x, initial_y);
     delay(_DELAY);
   }
 }
-
-  
-void line_x_left(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
+void line_x_left(uint16_t initial_x, uint16_t initial_y,uint16_t length=4000, uint16_t step = 5){
 
   uint16_t in_y = initial_y;
   galvo.setPos(initial_x, initial_y);
+  delay(_DELAY);
   for(uint16_t y= initial_y; y<(length+initial_y); y+= step){
     in_y -= step;
     galvo.setPos(initial_x, in_y);
     delay(_DELAY);
   }
 }
-void line_x_right(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
+void line_x_right(uint16_t initial_x, uint16_t initial_y,uint16_t length=4000, uint16_t step = 5){
 
   uint16_t in_y = initial_y;
   galvo.setPos(initial_x, initial_y);
+  delay(_DELAY);
   for(uint16_t y= initial_y; y<(length+initial_y); y+= step){
     in_y += step;
     galvo.setPos(initial_x, in_y);
@@ -164,7 +166,7 @@ void line_x_right(uint16_t initial_x, uint16_t initial_y, int length=4000, int s
   }
 }
 
-void line_xy(uint16_t initial_x, uint16_t initial_y, int length=4000, int step = 5){
+void line_xy(uint16_t initial_x, uint16_t initial_y,uint16_t length=4000, uint16_t step = 5){
   uint16_t x = initial_x;
   uint16_t y_in = initial_y;
   galvo.setPos(initial_x, initial_y);
@@ -175,16 +177,33 @@ void line_xy(uint16_t initial_x, uint16_t initial_y, int length=4000, int step =
     delay(_DELAY);
   }
 }
-*/
 
-
+void draw_ractangle(uint16_t xs, uint16_t ys, uint16_t length = 1000, uint16_t step = 2){
+  line_x_right(xs,ys,length,step);
+  line_y_down(xs,ys+length,length,step);
+  line_x_left(xs-length,ys+length,length,step);
+  line_y_up(xs-length,ys,length,step);
+}
+void checkers(uint16_t xs, uint16_t ys, uint16_t length = 1000, uint16_t step = 2){
+  uint16_t x = xs - length;
+  uint16_t y = ys + length;
+  for(uint16_t i=2; i < length; i += step*16){
+    for(uint16_t j=2; j < length; j+= step*16){
+      galvo.setPos(x+i, y-j);
+      delay(_DELAY);
+    }
+  }
+  galvo.setPos(xs, ys);
+  delay(_DELAY);
+}
 
 void setup() {
   galvo.begin();
-  galvo.setPos(0,0);
+  galvo.setPos(20000,20000);
 }
 
 void loop() {
+  /*
   String command = Serial.readString();
   // Set array size
   if(getValue(command, '_', 0) == "AS"){
@@ -203,7 +222,9 @@ void loop() {
       break;
     }
   }
-
+  */
+  draw_ractangle(20000,20000,2000,4);
+  checkers(20000,20000,2000,4);
 }
 
 
