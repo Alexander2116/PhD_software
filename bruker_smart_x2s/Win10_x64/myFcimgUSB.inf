@@ -1,0 +1,64 @@
+; Installation INF for the Fcimg USB Driver for Windows 2000/XP
+; Copyright (c) 2006 Fairchild Imaging Systems
+
+;///////////// Version section ////////////////////
+[Version]
+Signature="$WINDOWS NT$"	
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%MfgName%
+DriverPackageType = PlugAndPlay ; Not sure about it
+
+;///////////// Manufacturer section ////////////////////
+[Manufacturer]
+%MfgName%=FCIMG,NTx86,NTamd64	;Define model name
+
+[FCIMG] 
+%VID_198d&PID_4000.DeviceDesc%=CyUSB3, USB\VID_198d&PID_4000
+%VID_198d&PID_6000.DeviceDesc%=CyUSB3, USB\VID_198d&PID_6000
+
+[FCIMG.NTx86]
+%DeviceName%=CyUSB3, USB\VID_198d&PID_4000
+
+[FCIMG.NTamd64]
+%DeviceName%=CyUSB3, USB\VID_198d&PID_4000
+
+[CyUSB3.NT]
+CopyFiles=CyUSB3.NT.Copy
+
+[CyUSB3.NT.Copy]
+cyusb.sys
+[CyUSB3.NTx86]
+CopyFiles=CyUSB3.NTx86.Copy
+
+[CyUSB3.NTx86.Copy]
+cyusb.sys
+
+[CyUSB3.NTamd64]
+CopyFiles=CyUSB3.NTamd64.Copy
+[CyUSB3.NTamd64.Copy]
+cyusb.sys
+
+[CyUSB3.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,FcimgUsb.sys
+
+[SourceDisksNames]
+1=%FCIMG_USB_INSTALL%,,,
+
+[SourceDisksFiles]
+FcimgUsb.sys = 1
+
+[DestinationDirs]
+DriverFiles=10,System32\Drivers
+
+[DriverFiles]
+FcimgUsb.sys ; List of driver files to be copied
+
+[Strings]
+ProviderName="Fairchild Imaging"
+MfgName="Fairchild Imaging"
+DeviceName="Fairchild Imaging USB Device"
+FCIMG_USB_INSTALL="Fairchild Imaging USB Driver Installation Disk"
+VID_198d&PID_4000.DeviceDesc="Fairchild Imaging Breeze Digital Camera"
+VID_198d&PID_6000.DeviceDesc="Fairchild Imaging Apex2 USB Digital Camera"
