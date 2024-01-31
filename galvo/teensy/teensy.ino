@@ -199,7 +199,7 @@ void checkers(uint16_t xs, uint16_t ys, uint16_t length = 1000, uint16_t step = 
 
 void setup() {
   galvo.begin();
-  galvo.setPos(33500,29000);
+  galvo.setPos(36500,30000);
 }
 
 void loop() {
@@ -224,6 +224,6 @@ void loop() {
   }
   */
   // y , x (smaller number -> down, smaller number -> left)
-  draw_ractangle(33500,29000,6000,4);
-  checkers(33500,29000,6000,5);
+  draw_ractangle(36500,30000,6000,4);
+  checkers(36500,30000,6000,5);
 }
