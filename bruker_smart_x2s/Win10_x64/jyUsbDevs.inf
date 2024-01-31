@@ -1,0 +1,292 @@
+; jyUsbDev.inf
+;
+; Installation file (.inf) for the JY USB device (jyezusb).
+;
+; (c) Copyright 2007-2014 Jobin Yvon Inc.
+;
+; This is a mutlios INF file for installing HoribaJY USB device drivers.
+; It may be used on x86 and amd64 platforms.
+;
+
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%HoribaJY%
+DriverVer=08/21/2015,3.8.0.0
+CatalogFile.NTx86  = jyux86.cat
+CatalogFile.NTAMD64 = jyuamd64.cat
+DriverPackageType = PlugAndPlay
+DriverPackageDisplayName=%DESC%
+
+[DestinationDirs]
+DefaultDestDir   = 12
+
+
+
+;*****************************************
+; USB Device Install Section
+;*****************************************
+
+[Manufacturer]
+%HoribaJY%=HoribaJY, NTx86, NTamd64
+
+; These are the JYEZUSB pnp ids
+; For Win2K
+[HoribaJY]
+%HoribaJY.DeviceDesc0002% = jyezusb, USB\VID_0C9B&PID_0002
+%HoribaJY.DeviceDesc0004% = jyezusb, USB\VID_0C9B&PID_0004
+%HoribaJY.DeviceDesc0005% = jyezusb, USB\VID_0C9B&PID_0005
+%HoribaJY.DeviceDesc0006% = jyezusb, USB\VID_0C9B&PID_0006
+%HoribaJY.DeviceDesc0007% = jyezusb, USB\VID_0C9B&PID_0007
+%HoribaJY.DeviceDesc0008% = jyezusb, USB\VID_0C9B&PID_0008
+%HoribaJY.DeviceDesc0009% = jyezusb, USB\VID_0C9B&PID_0009
+%HoribaJY.DeviceDesc0010% = jyezusb, USB\VID_0C9B&PID_000A
+%HoribaJY.DeviceDesc0011% = jyezusb, USB\VID_0C9B&PID_000B
+%HoribaJY.DeviceDesc0012% = jyezusb, USB\VID_0C9B&PID_000C
+%HoribaJY.DeviceDesc0013% = jyezusb, USB\VID_0C9B&PID_000D
+%HoribaJY.DeviceDesc0014% = jyezusb, USB\VID_0C9B&PID_000E
+%HoribaJY.DeviceDesc0015% = jyezusb, USB\VID_0C9B&PID_000F
+%HoribaJY.DeviceDesc0016% = jyezusb, USB\VID_0C9B&PID_0010
+%HoribaJY.DeviceDesc0017% = jyezusb, USB\VID_0C9B&PID_0011
+%HoribaJY.DeviceDesc0018% = jyezusb, USB\VID_0C9B&PID_0012
+%HoribaJY.DeviceDesc0019% = jyezusb, USB\VID_0C9B&PID_0013
+%HoribaJY.DeviceDesc0020% = jyezusb, USB\VID_0C9B&PID_0014
+%HoribaJY.DeviceDesc0021% = jyezusb, USB\VID_0C9B&PID_0015
+%HoribaJY.DeviceDesc0022% = jyezusb, USB\VID_0C9B&PID_0016
+%HoribaJY.DeviceDesc0023% = jyezusb, USB\VID_0C9B&PID_0017
+%HoribaJY.DeviceDesc0024% = jyezusb, USB\VID_0C9B&PID_0018
+%HoribaJY.DeviceDesc0025% = jyezusb, USB\VID_0C9B&PID_0019
+%HoribaJY.DeviceDesc0026% = jyezusb, USB\VID_0C9B&PID_001A
+%HoribaJY.DeviceDesc0027% = jyezusb, USB\VID_0C9B&PID_001B
+%HoribaJY.DeviceDesc0028% = jyezusb, USB\VID_0C9B&PID_001C
+%HoribaJY.DeviceDesc0029% = jyezusb, USB\VID_0C9B&PID_001D
+%HoribaJY.DeviceDesc0030% = jyezusb, USB\VID_0C9B&PID_001E
+%HoribaJY.DeviceDesc0031% = jyezusb, USB\VID_0C9B&PID_001F
+%HoribaJY.DeviceDesc0032% = jyezusb, USB\VID_0C9B&PID_0020
+
+%HoribaJY.DeviceDesc0100% = jyezusb, USB\VID_0C9B&PID_0100
+%HoribaJY.DeviceDesc0101% = jyezusb, USB\VID_0C9B&PID_0101
+%HoribaJY.DeviceDesc01F0% = jyezusb, USB\VID_0C9B&PID_01F0
+%HoribaJY.DeviceDesc01F8% = jyezusb, USB\VID_0C9B&PID_01F8
+%HoribaJY.DeviceDesc01F9% = jyezusb, USB\VID_0C9B&PID_01F9
+%HoribaJY.DeviceDesc01FA% = jyezusb, USB\VID_0C9B&PID_01FA
+%HoribaJY.DeviceDesc0400% = jyezusb, USB\VID_0C9B&PID_0400
+%HoribaJY.DeviceDesc0401% = jyezusb, USB\VID_0C9B&PID_0401
+
+%HoribaJY.DeviceDesc_04B4_0081.DeviceDesc% = jyezusb, USB\VID_04B4&PID_0081
+%HoribaJY.DeviceDesc_04B4_8613.DeviceDesc% = jyezusb, USB\VID_04B4&PID_8613
+
+
+; For XP and later
+[HoribaJY.NTx86]
+%HoribaJY.DeviceDesc0002% = jyezusb, USB\VID_0C9B&PID_0002
+%HoribaJY.DeviceDesc0004% = jyezusb, USB\VID_0C9B&PID_0004
+%HoribaJY.DeviceDesc0005% = jyezusb, USB\VID_0C9B&PID_0005
+%HoribaJY.DeviceDesc0006% = jyezusb, USB\VID_0C9B&PID_0006
+%HoribaJY.DeviceDesc0007% = jyezusb, USB\VID_0C9B&PID_0007
+%HoribaJY.DeviceDesc0008% = jyezusb, USB\VID_0C9B&PID_0008
+%HoribaJY.DeviceDesc0009% = jyezusb, USB\VID_0C9B&PID_0009
+%HoribaJY.DeviceDesc0010% = jyezusb, USB\VID_0C9B&PID_000A
+%HoribaJY.DeviceDesc0011% = jyezusb, USB\VID_0C9B&PID_000B
+%HoribaJY.DeviceDesc0012% = jyezusb, USB\VID_0C9B&PID_000C
+%HoribaJY.DeviceDesc0013% = jyezusb, USB\VID_0C9B&PID_000D
+%HoribaJY.DeviceDesc0014% = jyezusb, USB\VID_0C9B&PID_000E
+%HoribaJY.DeviceDesc0015% = jyezusb, USB\VID_0C9B&PID_000F
+%HoribaJY.DeviceDesc0016% = jyezusb, USB\VID_0C9B&PID_0010
+%HoribaJY.DeviceDesc0017% = jyezusb, USB\VID_0C9B&PID_0011
+%HoribaJY.DeviceDesc0018% = jyezusb, USB\VID_0C9B&PID_0012
+%HoribaJY.DeviceDesc0019% = jyezusb, USB\VID_0C9B&PID_0013
+%HoribaJY.DeviceDesc0020% = jyezusb, USB\VID_0C9B&PID_0014
+%HoribaJY.DeviceDesc0021% = jyezusb, USB\VID_0C9B&PID_0015
+%HoribaJY.DeviceDesc0022% = jyezusb, USB\VID_0C9B&PID_0016
+%HoribaJY.DeviceDesc0023% = jyezusb, USB\VID_0C9B&PID_0017
+%HoribaJY.DeviceDesc0024% = jyezusb, USB\VID_0C9B&PID_0018
+%HoribaJY.DeviceDesc0025% = jyezusb, USB\VID_0C9B&PID_0019
+%HoribaJY.DeviceDesc0026% = jyezusb, USB\VID_0C9B&PID_001A
+%HoribaJY.DeviceDesc0027% = jyezusb, USB\VID_0C9B&PID_001B
+%HoribaJY.DeviceDesc0028% = jyezusb, USB\VID_0C9B&PID_001C
+%HoribaJY.DeviceDesc0029% = jyezusb, USB\VID_0C9B&PID_001D
+%HoribaJY.DeviceDesc0030% = jyezusb, USB\VID_0C9B&PID_001E
+%HoribaJY.DeviceDesc0031% = jyezusb, USB\VID_0C9B&PID_001F
+%HoribaJY.DeviceDesc0032% = jyezusb, USB\VID_0C9B&PID_0020
+
+%HoribaJY.DeviceDesc0100% = jyezusb, USB\VID_0C9B&PID_0100
+%HoribaJY.DeviceDesc0101% = jyezusb, USB\VID_0C9B&PID_0101
+%HoribaJY.DeviceDesc01F0% = jyezusb, USB\VID_0C9B&PID_01F0
+%HoribaJY.DeviceDesc01F8% = jyezusb, USB\VID_0C9B&PID_01F8
+%HoribaJY.DeviceDesc01F9% = jyezusb, USB\VID_0C9B&PID_01F9
+%HoribaJY.DeviceDesc01FA% = jyezusb, USB\VID_0C9B&PID_01FA
+%HoribaJY.DeviceDesc0400% = jyezusb, USB\VID_0C9B&PID_0400
+%HoribaJY.DeviceDesc0401% = jyezusb, USB\VID_0C9B&PID_0401
+
+%HoribaJY.DeviceDesc_04B4_0081.DeviceDesc% = jyezusb, USB\VID_04B4&PID_0081
+%HoribaJY.DeviceDesc_04B4_8613.DeviceDesc% = jyezusb, USB\VID_04B4&PID_8613
+
+
+[HoribaJY.NTamd64]
+%HoribaJY.DeviceDesc0002% = jyezusb, USB\VID_0C9B&PID_0002
+%HoribaJY.DeviceDesc0004% = jyezusb, USB\VID_0C9B&PID_0004
+%HoribaJY.DeviceDesc0005% = jyezusb, USB\VID_0C9B&PID_0005
+%HoribaJY.DeviceDesc0006% = jyezusb, USB\VID_0C9B&PID_0006
+%HoribaJY.DeviceDesc0007% = jyezusb, USB\VID_0C9B&PID_0007
+%HoribaJY.DeviceDesc0008% = jyezusb, USB\VID_0C9B&PID_0008
+%HoribaJY.DeviceDesc0009% = jyezusb, USB\VID_0C9B&PID_0009
+%HoribaJY.DeviceDesc0010% = jyezusb, USB\VID_0C9B&PID_000A
+%HoribaJY.DeviceDesc0011% = jyezusb, USB\VID_0C9B&PID_000B
+%HoribaJY.DeviceDesc0012% = jyezusb, USB\VID_0C9B&PID_000C
+%HoribaJY.DeviceDesc0013% = jyezusb, USB\VID_0C9B&PID_000D
+%HoribaJY.DeviceDesc0014% = jyezusb, USB\VID_0C9B&PID_000E
+%HoribaJY.DeviceDesc0015% = jyezusb, USB\VID_0C9B&PID_000F
+%HoribaJY.DeviceDesc0016% = jyezusb, USB\VID_0C9B&PID_0010
+%HoribaJY.DeviceDesc0017% = jyezusb, USB\VID_0C9B&PID_0011
+%HoribaJY.DeviceDesc0018% = jyezusb, USB\VID_0C9B&PID_0012
+%HoribaJY.DeviceDesc0019% = jyezusb, USB\VID_0C9B&PID_0013
+%HoribaJY.DeviceDesc0020% = jyezusb, USB\VID_0C9B&PID_0014
+%HoribaJY.DeviceDesc0021% = jyezusb, USB\VID_0C9B&PID_0015
+%HoribaJY.DeviceDesc0022% = jyezusb, USB\VID_0C9B&PID_0016
+%HoribaJY.DeviceDesc0023% = jyezusb, USB\VID_0C9B&PID_0017
+%HoribaJY.DeviceDesc0024% = jyezusb, USB\VID_0C9B&PID_0018
+%HoribaJY.DeviceDesc0025% = jyezusb, USB\VID_0C9B&PID_0019
+%HoribaJY.DeviceDesc0026% = jyezusb, USB\VID_0C9B&PID_001A
+%HoribaJY.DeviceDesc0027% = jyezusb, USB\VID_0C9B&PID_001B
+%HoribaJY.DeviceDesc0028% = jyezusb, USB\VID_0C9B&PID_001C
+%HoribaJY.DeviceDesc0029% = jyezusb, USB\VID_0C9B&PID_001D
+%HoribaJY.DeviceDesc0030% = jyezusb, USB\VID_0C9B&PID_001E
+%HoribaJY.DeviceDesc0031% = jyezusb, USB\VID_0C9B&PID_001F
+%HoribaJY.DeviceDesc0032% = jyezusb, USB\VID_0C9B&PID_0020
+
+%HoribaJY.DeviceDesc0100% = jyezusb, USB\VID_0C9B&PID_0100
+%HoribaJY.DeviceDesc0101% = jyezusb, USB\VID_0C9B&PID_0101
+%HoribaJY.DeviceDesc01F0% = jyezusb, USB\VID_0C9B&PID_01F0
+%HoribaJY.DeviceDesc01F8% = jyezusb, USB\VID_0C9B&PID_01F8
+%HoribaJY.DeviceDesc01F9% = jyezusb, USB\VID_0C9B&PID_01F9
+%HoribaJY.DeviceDesc01FA% = jyezusb, USB\VID_0C9B&PID_01FA
+%HoribaJY.DeviceDesc0400% = jyezusb, USB\VID_0C9B&PID_0400
+%HoribaJY.DeviceDesc0401% = jyezusb, USB\VID_0C9B&PID_0401
+
+%HoribaJY.DeviceDesc_04B4_0081.DeviceDesc% = jyezusb, USB\VID_04B4&PID_0081
+%HoribaJY.DeviceDesc_04B4_8613.DeviceDesc% = jyezusb, USB\VID_04B4&PID_8613
+
+
+[jyezusb.NT]
+CopyFiles=jyezusb.NT.Copy
+FriendlyNameFormat=%FriendlyNameFormat%
+
+[jyezusb.NT.Copy]
+jyezusb.sys
+
+[jyezusb.NTx86]
+CopyFiles=jyezusb.NTx86.Copy
+FriendlyNameFormat=%FriendlyNameFormat%
+
+[jyezusb.NTx86.Copy]
+jyezusb.sys
+
+
+[jyezusb.NTamd64]
+CopyFiles=jyezusb.NTamd64.Copy
+FriendlyNameFormat=%FriendlyNameFormat%
+
+[jyezusb.NTamd64.Copy]
+jyezusb64.sys
+
+
+;-------------- Service installation
+[jyezusb.NT.Services]
+AddService = jyezusb, 0x00000002, jyezusb_Service_Inst
+[jyezusb.NTx86.Services]
+AddService = jyezusb, 0x00000002, jyezusb_Service_Inst
+[jyezusb.NTamd64.Services]
+AddService = jyezusb64, 0x00000002, jyezusb_Service_Inst.NTamd64
+
+; -------------- jyezusb driver install sections
+[jyezusb_Service_Inst]
+DisplayName    = %EZUSB.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\jyezusb.sys
+LoadOrderGroup = Extended Base
+
+; -------------- jyezusb64 driver install sections
+[jyezusb_Service_Inst.NTamd64]
+DisplayName    = %EZUSB.SvcDesc64%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\jyezusb64.sys
+LoadOrderGroup = Extended Base
+
+[SourceDisksNames]
+1 = %DiskId1%,,,\i386
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,\i386
+
+[SourceDisksNames.amd64]
+1 = %DiskId1%,,,\amd64
+
+[SourceDisksFiles]
+jyezusb.sys  = 1,,
+
+[SourceDisksFiles.amd64]
+jyezusb64.sys  = 1,,
+
+
+[Strings]
+HoribaJY="HORIBA Scientific"
+DiskId1 = "HORIBA Scientific Installation Disk #1 (USB)"
+
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ClassName = "HJYUSB"
+DESC = "HII General Purpose USB Driver"
+EZUSB.SvcDesc="HII General Purpose USB Driver (jyezusb.sys)"
+EZUSB.SvcDesc64="HII General Purpose USB Driver (jyezusb64.sys)"
+FriendlyNameFormat = "HII%1!u!"
+
+HoribaJY.DeviceDesc0002 = "Camera"
+HoribaJY.DeviceDesc0003 = "HORIBA Scientific CCDFirmwareLoader2"
+HoribaJY.DeviceDesc0004 = "Camera2"
+HoribaJY.DeviceDesc0005 = "HORIBA Scientific Line Scan"
+HoribaJY.DeviceDesc0006 = "HORIBA Scientific MedCam"
+HoribaJY.DeviceDesc0007 = "HORIBA Scientific Synapse / Symphony II"
+HoribaJY.DeviceDesc0008 = "HORIBA Scientific Compact CCD"
+HoribaJY.DeviceDesc0009 = "HORIBA Scientific High Speed Line Scan OEM"
+HoribaJY.DeviceDesc0010 = "HORIBA Scientific High Speed Line Scan STD"
+HoribaJY.DeviceDesc0011 = "HORIBA Scientific Moderate CCD"
+HoribaJY.DeviceDesc0012 = "HORIBA Scientific DC Linescan"
+HoribaJY.DeviceDesc0013 = "HORIBA Scientific Syncerity"
+HoribaJY.DeviceDesc0014 = "HORIBA Scientific Compact CCD FL"
+HoribaJY.DeviceDesc0015 = "HII Elite"
+HoribaJY.DeviceDesc0016 = "HII OEM 16"
+HoribaJY.DeviceDesc0017 = "HII OEM 17"
+HoribaJY.DeviceDesc0018 = "HII OEM 18"
+HoribaJY.DeviceDesc0019 = "HII OEM 19"
+HoribaJY.DeviceDesc0020 = "HII OEM 20"
+HoribaJY.DeviceDesc0021 = "HII OEM 21"
+HoribaJY.DeviceDesc0022 = "HII OEM 22"
+HoribaJY.DeviceDesc0023 = "HII OEM 23"
+HoribaJY.DeviceDesc0024 = "HII OEM 24"
+HoribaJY.DeviceDesc0025 = "HII OEM 25"
+HoribaJY.DeviceDesc0026 = "HII OEM 26"
+HoribaJY.DeviceDesc0027 = "HII OEM 27"
+HoribaJY.DeviceDesc0028 = "HII OEM 28"
+HoribaJY.DeviceDesc0029 = "HII OEM 29"
+HoribaJY.DeviceDesc0030 = "HII OEM 30"
+HoribaJY.DeviceDesc0031 = "HII OEM 31"
+HoribaJY.DeviceDesc0032 = "HORIBA Scientific SynapseEM"
+
+HoribaJY.DeviceDesc_04B4_0081.DeviceDesc = "Cypress EZ-USB FX2 Development Board"
+HoribaJY.DeviceDesc_04B4_8613.DeviceDesc = "Cypress EZ-USB FX2 (68613) - EEPROM missing"
+
+HoribaJY.DeviceDesc0100 = "HORIBA Scientific MicroHR"
+HoribaJY.DeviceDesc0101 = "HORIBA Scientific iHR"
+HoribaJY.DeviceDesc01F0 = "HORIBA Scientific USB Bootloader"
+HoribaJY.DeviceDesc01F8 = "HORIBA Scientific Vend_Ax"
+HoribaJY.DeviceDesc01F9 = "HORIBA Scientific LineScan Test Fixture"
+HoribaJY.DeviceDesc01FA = "HORIBA Scientific Synapse Test Fixture"
+HoribaJY.DeviceDesc0400 = "HORIBA Scientific MFF PMT socket Controller"
+HoribaJY.DeviceDesc0401 = "HORIBA Scientific MFF SpectrAcq Motherboard"
+
