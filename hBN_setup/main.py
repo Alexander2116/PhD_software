@@ -7,6 +7,7 @@ import time
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os
+import numpy as np
 
 TEMP_pyro = 0
 TEMP_heater = 0
@@ -38,17 +39,45 @@ async def run_pyro(device:Raytek):
 async def run_heater(device:Ambrell):
     TEMP_heater = device.temp()
     
-async def set_temperature(device1:Raytek,device2:Ambrell, set_temp:float):
-    a = 2
+def set_temperature(device1:Raytek, device2:Ambrell, set_temp:float) -> float:
+    device2.set_amps(device2.max_amps)
+    pid = PID(set_temp, 1, 0.1, 0.1)
+    stable_amps = 0
+    temp = device1.read_N_temp()
+    max_amps = device2.max_amps()
+    # max amp till point of interest
+    while temp < set_temp-1:
+        temp = device1.read_N_temp()
+        time.sleep(0.01)
+    # set amps untill stable
+    i = 0
+    tem_diff = np.abs(temp - set_temp )
+    while i < 1000 :
+        i+=1
+        out = pid.update(device1.read_N_temp())
+        device2.set_amps(out/max_amps)
+        if(tem_diff > 0.5):
+            i=0
+    
+    stable_amps = out/max_amps
+    
+    return stable_amps
+    
 async def hold_temperature(set_temp:float, duration:int):
-    a = 2
+    start_time = time()
+
+    current_time = start_time
+    while current_time <= start_time + duration:
+
+        current_time = time()
+
 async def decrease_temp(set_temp:float, decrease_Rate:float):
     #decrease_Rate: C/h
     a = 2
     
     
 def read_pyro_temp(device:Raytek):
-    return device.read_W_temp()
+    return device.read_N_temp()
 
     
 async def main(pyro:Raytek, heater:Ambrell):

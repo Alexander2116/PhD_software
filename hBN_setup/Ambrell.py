@@ -36,6 +36,10 @@ class Ambrell:
         self.__send_comm("maxamps")
         self.max_amps = int(self.__read())
     
+    @property
+    def max_amps(self) -> float:
+        return self.max_amps
+    
     def help(self):
         self.__send_comm("?")
         print(self.__read())
